@@ -1,5 +1,5 @@
 import React from 'react';
-import './Contact-data.css';
+import classes from './Contact-data.css';
 import {withFormik} from 'formik';
 import Button from '../../Button/Button';
 import Yup from 'yup';
@@ -10,24 +10,31 @@ const contactData = ({
     handleChange
 }) => {
     return (
-        <div className="ContactData">
+        <div className={classes.ContactData}>
             <h1>Please enter your contact data below!</h1>
              <form onSubmit={handleSubmit}>
-                 <div className="Input">
-                    <input className="InputElement" type="text" name="name" placeholder="Your Name" value={values.name} onChange={handleChange} />
+                 <div className={classes.Input}>
+                    <input className={classes.InputElement} type="text" name="name" placeholder="Your Name" value={values.name} onChange={handleChange} />
                  </div>
-                 <div className="Input">
-                    <input className="InputElement" type="text" name="street" placeholder="Your Street" value={values.street} onChange={handleChange} />
+                 <div className={classes.Input}>
+                    <input className={classes.InputElement} type="text" name="street" placeholder="Your Street" value={values.street} onChange={handleChange} />
                  </div>
-                 <div className="Input">
-                    <input className="InputElement" type="text" name="zipCode" placeholder="ZIP Code" value={values.zipCode} onChange={handleChange} />
+                 <div className={classes.Input}>
+                    <input className={classes.InputElement} type="text" name="zipCode" placeholder="ZIP Code" value={values.zipCode} onChange={handleChange} />
                  </div>
-                 <div className="Input">
-                    <input className="InputElement" type="text" name="country" placeholder="Country" value={values.country} onChange={handleChange} />
+                 <div className={classes.Input}>
+                    <input className={classes.InputElement} type="text" name="country" placeholder="Country" value={values.country} onChange={handleChange} />
                  </div>
-                 <div className="Input">
-                    <input className="InputElement" type="text" name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
-                 </div>                 
+                 <div className={classes.Input}>
+                    <input className={classes.InputElement} type="text" name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
+                 </div>
+                 <div className={classes.Input}>
+                     <select className={classes.InputElement} name="deliveryMethod" value={values.deliveryMethod} onChange={handleChange}>
+                         <option value="fastest">Fastest</option>
+                         <option value="cheapest">Cheapest</option>
+                     </select>
+                 </div>
+
              </form>
             <Button btnType='Success'>ORDER</Button>
         </div>
@@ -35,13 +42,14 @@ const contactData = ({
 }
 
 export default withFormik({
-    mapPropsToValues({ name, street, zipCode, country, email}){
+    mapPropsToValues({ name, street, zipCode, country, email, deliveryMethod}){
         return {
             name: name || '',
             street: street  || '',
             zipCode: zipCode || '',
             country: country || '',
-            email: email || ''
+            email: email || '',
+            deliveryMethod: deliveryMethod || ''
         }
     }
 })(contactData);
